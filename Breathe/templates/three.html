@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pollution and UV/Ozone Data</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color:white; /* Dark gray text color */
+            height: 100%; 
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color:rgb(5, 39, 5);
+        }
+    
+        h1 {
+            /*background-color: #007bff; / Blue header background color */
+            color:black; /* White text color */
+            padding: 10px;
+            margin: 0;
+            text-align: center;
+        }
+
+        form {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #5eed63; /* Blue button color */
+            color: pink; /* White text color */
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        h2 {
+            color: #007bff; /* Blue header color */
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+        .cont{
+            border:1px solid green;
+            border-radius:100px;
+            margin-top:10%;
+            margin-bottom:8%;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto; /* Center the container horizontally */
+            padding: 20px;
+            border: 2px solid #051a03;
+            opacity: .8;
+            border-radius: 10px;
+            background-color: #051a03; /* White */
+        }
+
+        .title-box {
+            border-bottom: 2px solid #adbe6e;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+    
+        .content-box {
+            border: 2px solid #e8e9b2;
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #fdfff0; /* Light blue */
+            
+        }
+
+        h3 {
+            margin: 0;
+            text-align: center;
+        }
+
+        p {
+            padding: 10px;
+            margin: 0;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        ul li {
+            list-style-type: none;
+            margin-bottom: 5px;
+        }
+
+        ul li:before {
+            content: "\2022";  /* Bullet character */
+            color: #c0d1e4; /* Blue bullet color */
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        .ani {
+  
+  position: relative;
+  animation-name: example;
+  animation-duration: 4s;
+  
+}
+        @keyframes example {
+  0%   { left:0px; top:0px;}
+  25%  { left:200px; top:0px;}
+   50%  { left:0px; top:0px;}
+  
+}
+    
+    </style>
+</head>
+<body style="background-image:url('bg.jpg');">
+    <div class="cont">
+
+   
+    <h1>Breathe.</h1>
+<div style="text-align:center;">
+    <form method="post">
+        <label for="cityInput">Enter City: </label>
+        <input type="text" id="cityInput" name="city">
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if city_data %}
+        
+        <p>State: {{ city_data['state'] }}</p>
+        <p>City: {{ city_data['city'] }}</p>
+        
+
+       
+        <ul>
+            {% for pollutant in city_data['pollutant_data'] %}
+                <li>{{ pollutant['id'] }}: {{ pollutant['avg'] }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p></p>
+    {% endif %}
+   
+
+    
+
+    {% if uv_ozone_data %}
+        <h2>UV and Ozone Data</h2>
+        <p>UV: {{ uv_ozone_data['uv'] }}</p>
+        <p>Ozone: {{ uv_ozone_data['ozone'] }}</p>
+    {% else %}
+        <p></p>
+    {% endif %}
+   
+    
+
+{% if ml_result %}
+<p>AQI: {{ ml_result }}</p>
+{% else %}
+    <p></p>
+{% endif %}
+
+ <button onclick="window.location.href='/second';">More..
+  </button></div>
+  <br><br></div>
+
+</body>
+</html>
